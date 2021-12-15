@@ -1,31 +1,10 @@
 
 import java.io.IOException;
 import java.util.Scanner;
-import java.io.IOException;
-import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-class CurrencyValue {
-    double amount;
-
-    public double getAmount() {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter the amount to be convert:");
-            amount = scanner.nextDouble();
-            if (amount <= 0) {
-                throw new IllegalArgumentException("The amount cannot be negative or zero");
-            }
-
-        } catch (IllegalArgumentException iae) {
-            System.out.println("The amount cannot be negative or zero");
-        }
-        return amount;
-    }
-
-}
 
 class CurrencyConverter {
     final double USDININR = 76.08;
@@ -71,21 +50,36 @@ class CurrencyConverter {
     public double round(double value) {
         return (double) Math.round(value * 100) / 100;
     }
+
+
+    public double getAmount() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter the amount to be convert:");
+            amount = scanner.nextDouble();
+            if (amount <= 0) {
+                throw new IllegalArgumentException("The amount cannot be negative or zero");
+            }
+
+        } catch (IllegalArgumentException iae) {
+            System.out.println("The amount cannot be negative or zero");
+        }
+        return amount;
+    }
 }
 
 public class CurrencyConverterApplication {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         CurrencyConverter currencyConverter = new CurrencyConverter();
-        CurrencyValue currencyValue = new CurrencyValue();
 
 
         Logger logger = Logger.getLogger("MyLog");
-        FileHandler fh;
-        fh = new FileHandler("log.txt");
-        logger.addHandler(fh);
+        FileHandler fileHandler;
+        fileHandler = new FileHandler("log.txt");
+        logger.addHandler(fileHandler);
         SimpleFormatter formatter = new SimpleFormatter();
-        fh.setFormatter(formatter);
+        fileHandler.setFormatter(formatter);
         logger.info("Program Started...");
 
 
@@ -111,87 +105,99 @@ public class CurrencyConverterApplication {
                 case "USDtoINR":
                     logger.info("User selected Rupees to US Dollar conversion");
                     System.out.println("*********Converting USD to INR*********");
-                    amount = currencyValue.getAmount();
+                    amount = currencyConverter.getAmount();
+                    logger.info("User entered amount in USD : " + amount);
                     convertedAmount = currencyConverter.round(currencyConverter.dollarsToRupees(amount));
-                    System.out.println("Converted amount : " + convertedAmount);
-                    System.out.println("*********Convertion Completed*********");
-                    logger.info("User entered amount" + currencyValue);
+                    System.out.println("Amount converted to INR : " + convertedAmount);
+                    System.out.println("*********Conversion Completed*********");
+                    logger.info("Amount converted to INR : " + convertedAmount);
                     break;
 
                 case "INRtoUSD":
                     logger.info("User selected Dollar to Rupees conversion");
                     System.out.println("*********Converting INR to USD*********");
-                    amount = currencyValue.getAmount();
+                    amount = currencyConverter.getAmount();
+                    logger.info("User entered amount in INR : " + amount);
                     convertedAmount = currencyConverter.round(currencyConverter.rupeesToDollars(amount));
-                    System.out.println("Converted amount : " + convertedAmount);
-                    System.out.println("*********Convertion Completed*********");
-                    logger.info("User entered amount" + currencyValue);
+                    System.out.println("Amount converted to USD : " + convertedAmount);
+                    System.out.println("*********Conversion Completed*********");
+                    logger.info("Amount converted to USD : " + convertedAmount);
                     break;
 
                 case "OMRtoINR":
                     logger.info("User selected Omani Rial to Rupees conversion");
 
                     System.out.println("*********Converting OMR to INR*********");
-                    amount = currencyValue.getAmount();
+                    amount = currencyConverter.getAmount();
+                    logger.info("User entered amount in OMR: " + amount);
                     convertedAmount = currencyConverter.round(currencyConverter.omaniRiyalToRupees(amount));
-                    System.out.println("Converted amount : " + convertedAmount);
-                    System.out.println("*********Convertion Completed*********");
-                    logger.info("User entered amount" + currencyValue);
+                    System.out.println("Amount converted to INR : " + convertedAmount);
+                    System.out.println("*********Conversion Completed*********");
+                    logger.info("Amount converted to INR : " + convertedAmount);
                     break;
 
                 case "INRtoOMR":
                     logger.info("User selected Rupees to Omani Rial");
                     System.out.println("*********Converting INR to OMR*********");
-                    amount = currencyValue.getAmount();
+                    amount = currencyConverter.getAmount();
+                    logger.info("User entered amount in INR : " + amount);
                     convertedAmount = currencyConverter.round(currencyConverter.rupeesToOmaniRiyal(amount));
-                    System.out.println("Converted amount : " + convertedAmount);
-                    System.out.println("*********Convertion Completed*********");
-                    logger.info("User entered amount" + currencyValue);
+                    System.out.println("Amount converted to OMR : " + convertedAmount);
+                    System.out.println("*********Conversion Completed*********");
+                    logger.info("User entered amount : " + convertedAmount);
                     break;
 
                 case "AEDtoINR":
                     logger.info("User selected United Arab Emirates Dirham to Rupees");
                     System.out.println("*********Converting AED to INR*********");
-                    amount = currencyValue.getAmount();
+                    amount = currencyConverter.getAmount();
+                    logger.info("User entered amount in AED : " + amount);
                     convertedAmount = currencyConverter.round(currencyConverter.unitedArabEmiratesDirhamToRupees(amount));
-                    System.out.println("Converted amount : " + convertedAmount);
-                    System.out.println("*********Convertion Completed*********");
-                    logger.info("User entered amount" + currencyValue);
+                    System.out.println("Amount converted to INR : " + convertedAmount);
+                    System.out.println("*********Conversion Completed*********");
+                    logger.info("Amount converted to INR : " + convertedAmount);
                     break;
 
                 case "INRtoAED":
                     logger.info("User selected Rupees to United Arab Emirates Dirham");
                     System.out.println("*********Converting INR to AED*********");
-                    amount = currencyValue.getAmount();
+                    amount = currencyConverter.getAmount();
+                    logger.info("User entered amount in INR: " + amount);
                     convertedAmount = currencyConverter.round(currencyConverter.rupeesToUnitedArabEmiratesDirham(amount));
-                    System.out.println("Converted amount : " + convertedAmount);
-                    System.out.println("*********Convertion Completed*********");
-                    logger.info("User entered amount" + currencyValue);
+                    System.out.println("Amount converted to AED : " + convertedAmount);
+                    System.out.println("*********Conversion Completed*********");
+                    logger.info("User entered amount : " + convertedAmount);
                     break;
 
                 case "EURtoINR":
                     logger.info("User selected Euro to Rupees");
                     System.out.println("*********Converting EUR to INR*********");
-                    amount = currencyValue.getAmount();
+                    amount = currencyConverter.getAmount();
+                    logger.info("User entered amount in EUR : " + amount);
                     convertedAmount = currencyConverter.round(currencyConverter.euroToRupees(amount));
-                    System.out.println("Converted amount : " + convertedAmount);
-                    System.out.println("*********Convertion Completed*********");
-                    logger.info("User entered amount" + currencyValue);
+                    System.out.println("Amount converted to INR : " + convertedAmount);
+                    System.out.println("*********Conversion Completed*********");
+                    logger.info("Amount converted to INR : " + convertedAmount);
                     break;
 
                 case "INRtoEUR":
                     logger.info("User selected Rupees to Euro");
 
                     System.out.println("*********Converting INR to EUR*********");
-                    amount = currencyValue.getAmount();
+                    amount = currencyConverter.getAmount();
+                    logger.info("User entered amount : " + amount);
                     convertedAmount = currencyConverter.round(currencyConverter.rupeesToEuro(amount));
-                    System.out.println("Converted amount : " + convertedAmount);
-                    System.out.println("*********Convertion Completed*********");
-                    logger.info("User entered amount" + currencyValue);
+                    System.out.println("Amount converted to EUR : " + convertedAmount);
+                    System.out.println("*********Conversion Completed*********");
+                    logger.info("User entered amount : " + convertedAmount);
                     break;
 
                 case "exit":
                     exit++;
+                    break;
+
+                default:
+                    System.out.println("Please Enter A Valid Input");
 
             }
         }
